@@ -1,0 +1,17 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "witheringends"
+    }
+  ],
+  "type": "witheringends:crushing",
+  "ingredient": [
+    {
+      "item": "witheringends:tungsten_ore"
+    }
+  ],
+  "result": "witheringends:tungsten_dust",
+  "count": 2,
+  "crushingTime": 500
+}

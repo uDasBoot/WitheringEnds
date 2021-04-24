@@ -1,0 +1,217 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"1": "block/obsidian",
+		"2": "block/iron_block",
+		"3": "block/netherite_block",
+		"4": "witheringends:block/laser",
+		"5": "witheringends:block/encasement",
+		"particle": "block/obsidian"
+	},
+	"elements": [
+		{
+			"name": "Anvil",
+			"from": [1, 1, 1],
+			"to": [15, 7, 15],
+			"faces": {
+				"north": {"uv": [1, 1, 15, 7], "texture": "#2"},
+				"east": {"uv": [1, 1, 15, 7], "texture": "#2"},
+				"south": {"uv": [1, 1, 15, 7], "texture": "#2"},
+				"west": {"uv": [1, 1, 15, 7], "texture": "#2"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#2"}
+			}
+		},
+		{
+			"name": "14x14",
+			"from": [1, 18, 1],
+			"to": [15, 19, 15],
+			"faces": {
+				"north": {"uv": [1, 1, 15, 2], "texture": "#3"},
+				"east": {"uv": [1, 1, 15, 2], "texture": "#3"},
+				"south": {"uv": [1, 1, 15, 2], "texture": "#3"},
+				"west": {"uv": [1, 1, 15, 2], "texture": "#3"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#3"}
+			}
+		},
+		{
+			"name": "12x12",
+			"from": [2, 17, 2],
+			"to": [14, 18, 14],
+			"faces": {
+				"north": {"uv": [2, 2, 14, 3], "texture": "#3"},
+				"east": {"uv": [2, 2, 14, 3], "texture": "#3"},
+				"south": {"uv": [2, 2, 14, 3], "texture": "#3"},
+				"west": {"uv": [2, 2, 14, 3], "texture": "#3"},
+				"down": {"uv": [2, 2, 14, 14], "texture": "#3"}
+			}
+		},
+		{
+			"name": "10x10",
+			"from": [3, 16, 3],
+			"to": [13, 17, 13],
+			"faces": {
+				"north": {"uv": [3, 3, 13, 4], "texture": "#3"},
+				"east": {"uv": [3, 3, 13, 4], "texture": "#3"},
+				"south": {"uv": [3, 3, 13, 4], "texture": "#3"},
+				"west": {"uv": [3, 3, 13, 4], "texture": "#3"},
+				"down": {"uv": [3, 3, 13, 13], "texture": "#3"}
+			}
+		},
+		{
+			"name": "8x8",
+			"from": [4, 15, 4],
+			"to": [12, 16, 12],
+			"faces": {
+				"north": {"uv": [4, 4, 12, 5], "texture": "#3"},
+				"east": {"uv": [4, 4, 12, 5], "texture": "#3"},
+				"south": {"uv": [4, 4, 12, 5], "texture": "#3"},
+				"west": {"uv": [4, 4, 12, 5], "texture": "#3"},
+				"down": {"uv": [4, 4, 12, 12], "texture": "#3"}
+			}
+		},
+		{
+			"name": "6x6",
+			"from": [5, 14, 5],
+			"to": [11, 15, 11],
+			"faces": {
+				"north": {"uv": [5, 5, 11, 6], "texture": "#3"},
+				"east": {"uv": [5, 5, 11, 6], "texture": "#3"},
+				"south": {"uv": [5, 5, 11, 6], "texture": "#3"},
+				"west": {"uv": [5, 5, 11, 6], "texture": "#3"},
+				"up": {"uv": [5, 5, 11, 6], "texture": "#3"},
+				"down": {"uv": [5, 5, 11, 11], "texture": "#3"}
+			}
+		},
+		{
+			"name": "4x4",
+			"from": [6, 13, 6],
+			"to": [10, 14, 10],
+			"faces": {
+				"north": {"uv": [6, 6, 10, 7], "texture": "#3"},
+				"east": {"uv": [6, 6, 10, 7], "texture": "#3"},
+				"south": {"uv": [6, 6, 10, 7], "texture": "#3"},
+				"west": {"uv": [6, 6, 10, 7], "texture": "#3"},
+				"up": {"uv": [6, 6, 10, 7], "texture": "#3"},
+				"down": {"uv": [6, 6, 10, 10], "texture": "#3"}
+			}
+		},
+		{
+			"name": "2x2",
+			"from": [7, 12, 7],
+			"to": [9, 13, 9],
+			"faces": {
+				"north": {"uv": [4, 0, 12, 4], "texture": "#4"},
+				"east": {"uv": [4, 0, 12, 4], "texture": "#4"},
+				"south": {"uv": [4, 0, 12, 4], "texture": "#4"},
+				"west": {"uv": [4, 0, 12, 4], "texture": "#4"},
+				"up": {"uv": [4, 0, 12, 4], "texture": "#4"},
+				"down": {"uv": [4, 4, 12, 12], "texture": "#4"}
+			}
+		},
+		{
+			"name": "Base",
+			"from": [0, 0, 0],
+			"to": [16, 1, 16],
+			"faces": {
+				"north": {"uv": [0, 15, 16, 16], "texture": "#1"},
+				"east": {"uv": [0, 15, 16, 16], "texture": "#1"},
+				"south": {"uv": [0, 15, 16, 16], "texture": "#1"},
+				"west": {"uv": [0, 15, 16, 16], "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#1"}
+			}
+		},
+		{
+			"name": "Top",
+			"from": [0, 19, 0],
+			"to": [16, 20, 16],
+			"faces": {
+				"north": {"uv": [0, 15, 16, 16], "texture": "#1"},
+				"east": {"uv": [0, 15, 16, 16], "texture": "#1"},
+				"south": {"uv": [0, 15, 16, 16], "texture": "#1"},
+				"west": {"uv": [0, 15, 16, 16], "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#1"}
+			}
+		},
+		{
+			"name": "Pillar1",
+			"from": [0, 1, 15],
+			"to": [1, 19, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 16], "texture": "#1"},
+				"east": {"uv": [0, 0, 1, 16], "texture": "#1"},
+				"south": {"uv": [0, 0, 1, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 1, 16], "texture": "#1"}
+			}
+		},
+		{
+			"name": "Pillar2",
+			"from": [15, 1, 15],
+			"to": [16, 19, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 16], "texture": "#1"},
+				"east": {"uv": [0, 0, 1, 16], "texture": "#1"},
+				"south": {"uv": [0, 0, 1, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 1, 16], "texture": "#1"}
+			}
+		},
+		{
+			"name": "Pillar3",
+			"from": [0, 1, 0],
+			"to": [1, 19, 1],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 16], "texture": "#1"},
+				"east": {"uv": [0, 0, 1, 16], "texture": "#1"},
+				"south": {"uv": [0, 0, 1, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 1, 16], "texture": "#1"}
+			}
+		},
+		{
+			"name": "Pillar4",
+			"from": [15, 1, 0],
+			"to": [16, 19, 1],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 16], "texture": "#1"},
+				"east": {"uv": [0, 0, 1, 16], "texture": "#1"},
+				"south": {"uv": [0, 0, 1, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 1, 16], "texture": "#1"}
+			}
+		},
+		{
+			"name": "Encasement",
+			"from": [1, 7, 1],
+			"to": [15, 8, 15],
+			"faces": {
+				"north": {"uv": [1, 1, 15, 2], "rotation": 180, "texture": "#5"},
+				"east": {"uv": [14, 1, 15, 15], "rotation": 90, "texture": "#5"},
+				"south": {"uv": [1, 14, 15, 15], "texture": "#5"},
+				"west": {"uv": [1, 1, 2, 15], "rotation": 270, "texture": "#5"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#5"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#5"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "VoxelShapes",
+			"origin": [8, 8, 8],
+			"children": [
+				{
+					"name": "Base",
+					"origin": [8, 8, 8],
+					"children": [0]
+				},
+				{
+					"name": "Injector",
+					"origin": [8, 8, 8],
+					"children": [1, 2, 3, 4, 5, 6, 7]
+				},
+				{
+					"name": "Frame",
+					"origin": [8, 8, 8],
+					"children": [8, 9, 10, 11, 12, 13]
+				}, 14]
+		}
+	]
+}

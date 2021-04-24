@@ -1,0 +1,44 @@
+{
+	"item.witheringends.encased_nether_star": "Encased Nether Star",
+	"item.witheringends.encasement": "Encasement",
+	"item.witheringends.titanium_nugget": "Titanium Nugget",
+	"item.witheringends.titanium_ingot": "Titanium Ingot",
+	"item.witheringends.titanium_dust": "Titanium Dust",
+	"item.witheringends.titanium_door": "Titanium Door",
+	"item.witheringends.tungsten_carbide_rod": "Tungsten Carbide Rod",
+	"item.witheringends.tungsten_ingot": "Tungsten Ingot",
+	"item.witheringends.tungsten_nugget": "Tungsten Nugget",
+	"item.witheringends.tungsten_dust": "Tungsten Dust",
+	"item.witheringends.aluminum_ingot": "Aluminum Ingot",
+	"item.witheringends.aluminum_nugget": "Aluminum Nugget",
+	"item.witheringends.aluminum_dust": "Aluminum Dust",
+	
+	"item.witheringends.boss_empowered_helmet": "Boss Empowered Helmet",
+	"item.witheringends.boss_empowered_chestplate": "Boss Empowered Chestplate",
+	"item.witheringends.boss_empowered_leggings": "Boss Empowered Leggings",
+	"item.witheringends.boss_empowered_boots": "Boss Empowered Boots",
+	
+	"item.witheringends.titanium_helmet": "Titanium Helmet",
+	"item.witheringends.titanium_chestplate": "Titanium Chestplate",
+	"item.witheringends.titanium_leggings": "Titanium Leggings",
+	"item.witheringends.titanium_boots": "Titanium Boots",
+	"item.witheringends.titanium_horse_armor": "Titanium Horse Armor",
+	"item.witheringends.titanium_axe": "Titanium Axe",
+	"item.witheringends.titanium_hoe": "Titanium Hoe",
+	"item.witheringends.titanium_pickaxe": "Titanium Pickaxe",
+	"item.witheringends.titanium_shovel": "Titanium Shovel",
+	"item.witheringends.titanium_sword": "Titanium Sword",
+	
+	"block.witheringends.injector_machine": "Injector",
+	"block.witheringends.crusher_machine": "Crusher",
+	"block.witheringends.arc_furnace_machine": "Arc Furnace",
+	"block.witheringends.titanium_ore": "Titanium Ore",
+	"block.witheringends.tungsten_ore": "Tungsten Ore",
+	"block.witheringends.aluminum_ore": "Aluminum Ore",
+	
+	"container.witheringends.injector_machine": "Injector",
+	"container.witheringends.crusher_machine": "Crusher",
+	"container.witheringends.arc_furnace_machine": "Arc Furnace",
+	
+	"itemGroup.withering_ends": "Withering Ends"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "witheringends:item/aluminum_ingot"
+  }
+}
