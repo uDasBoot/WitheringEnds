@@ -3,7 +3,7 @@ package com.udasboot.witheringends.client.screen;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.udasboot.witheringends.WitheringEnds;
-import com.udasboot.witheringends.common.container.ArcFurnaceContainer;
+import com.udasboot.witheringends.container.ArcFurnaceContainer;
 
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;

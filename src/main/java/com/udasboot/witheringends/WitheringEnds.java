@@ -3,16 +3,11 @@ package com.udasboot.witheringends;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.udasboot.witheringends.common.item.crafting.recipe.CrusherRecipe;
-import com.udasboot.witheringends.core.init.FeatureInit;
-import com.udasboot.witheringends.core.init.util.Registration;
-import com.udasboot.witheringends.core.network.WitheringEndsNetwork;
+import com.udasboot.witheringends.init.FeatureInit;
+import com.udasboot.witheringends.init.Registration;
+import com.udasboot.witheringends.network.WitheringEndsNetwork;
 
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.SpecialRecipeSerializer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -30,7 +25,6 @@ public class WitheringEnds {
 	public WitheringEnds() {		
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.addListener(this::commonSetup);
-		Registration.RECIPE_SERIALIZERS.register(bus);
 		Registration.register();
 		
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, FeatureInit::addOres);
