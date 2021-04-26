@@ -40,5 +40,7 @@
 	"container.witheringends.crusher_machine": "Crusher",
 	"container.witheringends.arc_furnace_machine": "Arc Furnace",
 	
-	"itemGroup.withering_ends": "Withering Ends"
+	"itemGroup.withering_ends": "Withering Ends",
+	
+	"entity.witheringends.ancient": "Ancient"
 }

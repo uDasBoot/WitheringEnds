@@ -3,14 +3,18 @@ package com.udasboot.witheringends;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.udasboot.witheringends.entities.AncientEntity;
+import com.udasboot.witheringends.init.EntityTypeInit;
 import com.udasboot.witheringends.init.FeatureInit;
 import com.udasboot.witheringends.init.Registration;
 import com.udasboot.witheringends.network.WitheringEndsNetwork;
 
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -25,14 +29,19 @@ public class WitheringEnds {
 	public WitheringEnds() {		
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.addListener(this::commonSetup);
+		
 		Registration.register();
 		
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, FeatureInit::addOres);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public void commonSetup(final FMLCommonSetupEvent event) {
 		WitheringEndsNetwork.init();
+		DeferredWorkQueue.runLater(() -> {
+			GlobalEntityTypeAttributes.put(EntityTypeInit.ANCIENT_ENTITY.get(), AncientEntity.setCustomMutableAttribute().build());
+		});
 	}
 }

@@ -21,8 +21,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.energy.IEnergyStorage;
 
-public class ArcFurnaceTileEntity extends LockableTileEntity implements ISidedInventory, ITickableTileEntity {
+public class ArcFurnaceTileEntity extends LockableTileEntity implements IEnergyStorage, ISidedInventory, ITickableTileEntity {
 
 	public static int slots = 4;
 	private static final int[] SLOTS_FOR_UP = new int[] { 0 };
@@ -227,8 +228,41 @@ public class ArcFurnaceTileEntity extends LockableTileEntity implements ISidedIn
 	}
 
 	@Override
-	public boolean canPlaceItem(int index, ItemStack itemStack) {
-		return false;
+	public int receiveEnergy(int maxReceive, boolean simulate) {
+		int energyRecieved = ((this.energy + maxReceive) > this.maxEnergy) ? this.maxEnergy : maxReceive;
+		if(!simulate) {
+			this.energy += energyRecieved;
+		}
+		return energyRecieved;
+	}
+
+	@Override
+	public int extractEnergy(int maxExtract, boolean simulate) {
+		int energyExtracted = (this.energy < maxExtract) ? this.energy : maxExtract;
+		if(!simulate) {
+			this.energy -= energyExtracted;
+		}
+		return energyExtracted;
+	}
+
+	@Override
+	public int getEnergyStored() {
+		return this.energy;
+	}
+
+	@Override
+	public int getMaxEnergyStored() {
+		return this.maxEnergy;
+	}
+
+	@Override
+	public boolean canExtract() {
+		return this.energy > 0;
+	}
+
+	@Override
+	public boolean canReceive() {
+		return this.energy < this.maxEnergy;
 	}
 
 }
