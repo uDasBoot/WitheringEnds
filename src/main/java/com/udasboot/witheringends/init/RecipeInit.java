@@ -5,7 +5,6 @@ import java.util.function.Supplier;
 import com.udasboot.witheringends.WitheringEnds;
 import com.udasboot.witheringends.item.crafting.recipe.CrusherRecipe;
 import com.udasboot.witheringends.item.crafting.recipe.InjectorRecipe;
-import com.udasboot.witheringends.util.Constants;
 
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -18,7 +17,7 @@ public class RecipeInit {
 	public static class Types {
 		public static final IRecipeType<InjectorRecipe> INJECTING = IRecipeType
 				.register(WitheringEnds.MOD_ID + "injecting");
-		public static final IRecipeType<CrusherRecipe> CRUSHING = registerType(Constants.modId("crushing"));
+		public static final IRecipeType<CrusherRecipe> CRUSHING = registerType(WitheringEnds.CONSTANTS.genResourceLocation("crushing"));
 		
 		private static <T extends IRecipe<?>> IRecipeType<T> registerType(ResourceLocation name) {
 	        return Registry.register(Registry.RECIPE_TYPE, name, new IRecipeType<T>() {
@@ -31,9 +30,9 @@ public class RecipeInit {
 	}
 
 	public static class Serializers {
-		public static final RegistryObject<IRecipeSerializer<?>> INJECTING = registerSerializer(Constants.INJECTING, InjectorRecipe.Serializer::new);
+		public static final RegistryObject<IRecipeSerializer<?>> INJECTING = registerSerializer(WitheringEnds.CONSTANTS.genResourceLocation("injecting"), InjectorRecipe.Serializer::new);
 
-		public static final RegistryObject<IRecipeSerializer<?>> CRUSHING = registerSerializer(Constants.CRUSHING, CrusherRecipe.Serializer::new);
+		public static final RegistryObject<IRecipeSerializer<?>> CRUSHING = registerSerializer(WitheringEnds.CONSTANTS.genResourceLocation("crushing"), CrusherRecipe.Serializer::new);
 		
 		private static RegistryObject<IRecipeSerializer<?>> registerSerializer(ResourceLocation name, Supplier<IRecipeSerializer<?>> serializer) {
 	        return Registration.RECIPE_SERIALIZERS.register(name.getPath(), serializer);

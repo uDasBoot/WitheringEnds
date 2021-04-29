@@ -2,6 +2,7 @@ package com.udasboot.witheringends.init;
 
 import com.udasboot.witheringends.container.ArcFurnaceContainer;
 import com.udasboot.witheringends.container.CrusherContainer;
+import com.udasboot.witheringends.container.GeneratorContainer;
 import com.udasboot.witheringends.container.InjectorContainer;
 
 import net.minecraft.inventory.container.Container;
@@ -18,6 +19,8 @@ public class ContainerTypeInit {
 			"crusher_machine", CrusherContainer::new);
 	public static final RegistryObject<ContainerType<ArcFurnaceContainer>> ARC_FURNACE_CONTAINER_TYPE = register(
 			"arc_furnace_machine", ArcFurnaceContainer::new);
+	public static final RegistryObject<ContainerType<GeneratorContainer>> GENERATOR_CONTAINER_TYPE = register(
+			"generator_machine", GeneratorContainer::new);
 
 	public static void register() {
 	}

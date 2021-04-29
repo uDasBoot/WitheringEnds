@@ -1,4 +1,4 @@
-package com.udasboot.witheringends.client.screen;
+package com.udasboot.witheringends.client.gui.screen;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -47,9 +47,9 @@ public class ArcFurnaceScreen extends ContainerScreen<ArcFurnaceContainer> {
 		int x = (this.width - this.getXSize()) / 2;
 		int y = (this.height - this.getYSize()) / 2;
 		this.blit(matrixStack, x, y, 0, 0, this.getXSize(), this.getYSize());
-		int crushProgress = (int) (24.0 * this.menu.getArcProgress());
+		int crushProgress = (int) (24.0 * this.menu.getProgressPercent());
 	    this.blit(matrixStack, x + 79, y + 34, 176, 14, crushProgress, 16);
-	    if(this.menu.isLit()) {
+	    if(this.menu.getEx5()) {
 	    	this.blit(matrixStack, x + 56, y + 36, 176, 0, 14, 14);
 	    }
 	}

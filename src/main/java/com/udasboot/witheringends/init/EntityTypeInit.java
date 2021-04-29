@@ -19,5 +19,6 @@ public class EntityTypeInit {
 		return Registration.ENTITY_TYPES.register(name, () -> EntityType.Builder.of(entity, classification).sized(1.0f, 2.0f).build(new ResourceLocation(WitheringEnds.MOD_ID, name).toString()));
 	}
 
-	public static void register() {}
+	public static void register() {
+	}
 }

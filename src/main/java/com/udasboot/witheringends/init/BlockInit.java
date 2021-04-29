@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import com.udasboot.witheringends.block.AluminumOre;
 import com.udasboot.witheringends.block.ArcFurnace;
 import com.udasboot.witheringends.block.Crusher;
+import com.udasboot.witheringends.block.Generator;
 import com.udasboot.witheringends.block.Injector;
 import com.udasboot.witheringends.block.TitaniumOre;
 import com.udasboot.witheringends.block.TungstenOre;
@@ -19,6 +20,7 @@ public class BlockInit {
 	public static final RegistryObject<Block> INJECTOR = register("injector_machine", Injector::new);
 	public static final RegistryObject<Block> CRUSHER = register("crusher_machine", Crusher::new);
 	public static final RegistryObject<Block> ARC_FURNACE = register("arc_furnace_machine", ArcFurnace::new);
+	public static final RegistryObject<Block> GENERATOR = register("generator_machine", Generator::new);
 	
 	public static final RegistryObject<Block> TITANIUM_ORE = register("titanium_ore", TitaniumOre::new);
 	public static final RegistryObject<Block> ALUMINUM_ORE = register("aluminum_ore", AluminumOre::new);

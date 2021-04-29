@@ -1,6 +1,8 @@
 {
 	"item.witheringends.encased_nether_star": "Encased Nether Star",
 	"item.witheringends.encasement": "Encasement",
+	"item.witheringends.guide_book": "Withering Ends Guide",
+	
 	"item.witheringends.titanium_nugget": "Titanium Nugget",
 	"item.witheringends.titanium_ingot": "Titanium Ingot",
 	"item.witheringends.titanium_dust": "Titanium Dust",
@@ -42,5 +44,8 @@
 	
 	"itemGroup.withering_ends": "Withering Ends",
 	
-	"entity.witheringends.ancient": "Ancient"
+	"entity.witheringends.ancient": "Ancient",
+	
+	"key.category.witheringends": "Withering Ends",
+	"key.witheringends.show_tool_tip": "Show Tooltips"
 }

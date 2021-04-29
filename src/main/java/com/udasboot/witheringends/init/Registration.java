@@ -36,7 +36,7 @@ public class Registration{
 		RECIPE_SERIALIZERS.register(modEventBus);
 		TILE_ENTITY_TYPES.register(modEventBus);
 		ENTITY_TYPES.register(modEventBus);
-		
+
 		BlockInit.register();
 		ItemInit.register();
 		ContainerTypeInit.register();

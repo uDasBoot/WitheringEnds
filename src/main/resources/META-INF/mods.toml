@@ -25,3 +25,9 @@ TBD
     versionRange="[1.16.5,1.17)"
     ordering="NONE"
     side="BOTH"
+[[dependencies.witheringends]]
+    modId="dascore"
+    mandatory=true
+    versionRange=""
+    ordering="NONE"
+    side="BOTH"

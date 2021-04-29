@@ -1,88 +1,36 @@
 package com.udasboot.witheringends.tileentity;
 
+import com.udasboot.bootcore.tileentity.AbstractMachineTileEntity;
 import com.udasboot.witheringends.WitheringEnds;
 import com.udasboot.witheringends.container.ArcFurnaceContainer;
 import com.udasboot.witheringends.init.TileEntityTypeInit;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.IIntArray;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.energy.IEnergyStorage;
 
-public class ArcFurnaceTileEntity extends LockableTileEntity implements IEnergyStorage, ISidedInventory, ITickableTileEntity {
+public class ArcFurnaceTileEntity extends AbstractMachineTileEntity implements ISidedInventory {
 
-	public static int slots = 4;
 	private static final int[] SLOTS_FOR_UP = new int[] { 0 };
 	private static final int[] SLOTS_FOR_DOWN = new int[] { 3 };
 	private static final int[] SLOTS_FOR_SIDES = new int[] { 1, 2 };
 
-	protected NonNullList<ItemStack> items = NonNullList.withSize(slots, ItemStack.EMPTY);
 	protected boolean isLit;
-	protected int energy;
-	protected int maxEnergy;
-	protected int arcProgress;
-	protected int totalArcTime;
-
-	public final IIntArray dataAccess = new IIntArray() {
-		public int get(int index) {
-			switch (index) {
-			case 0:
-				return ArcFurnaceTileEntity.this.energy;
-			case 1:
-				return ArcFurnaceTileEntity.this.maxEnergy;
-			case 2:
-				return ArcFurnaceTileEntity.this.arcProgress;
-			case 3:
-				return ArcFurnaceTileEntity.this.totalArcTime;
-			case 4:
-				return ArcFurnaceTileEntity.this.isLit ? 1 : 0;
-			default:
-				return 0;
-			}
-		}
-
-		public void set(int index, int value) {
-			switch (index) {
-			case 0:
-				ArcFurnaceTileEntity.this.energy = value;
-				break;
-			case 1:
-				ArcFurnaceTileEntity.this.maxEnergy = value;
-			case 2:
-				ArcFurnaceTileEntity.this.arcProgress = value;
-			case 3:
-				ArcFurnaceTileEntity.this.totalArcTime = value;
-			case 4:
-				ArcFurnaceTileEntity.this.isLit = (value == 1);
-			}
-		}
-
-		public int getCount() {
-			return 5;
-		}
-	};
 
 	public ArcFurnaceTileEntity(TileEntityType<?> tileEntityType) {
-		super(tileEntityType);
+		super(tileEntityType, 4);
 		this.isLit = false;
-		this.maxEnergy = 10000;
-		this.energy = 0;
-		this.arcProgress = 0;
-		this.totalArcTime = 40;
+		this.dataAccess.set(8, this.isLit ? 1 : 0);
 	}
 
 	public ArcFurnaceTileEntity() {
@@ -90,73 +38,21 @@ public class ArcFurnaceTileEntity extends LockableTileEntity implements IEnergyS
 	}
 
 	@Override
-	public int getContainerSize() {
-		return slots;
-	}
-
-	@Override
-	public boolean isEmpty() {
-		for (ItemStack itemStack : items) {
-			if (!itemStack.isEmpty()) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	@Override
-	public ItemStack getItem(int index) {
-		return items.get(index);
-	}
-
-	@Override
-	public ItemStack removeItem(int index, int amount) {
-		return ItemStackHelper.removeItem(items, index, amount);
-	}
-
-	@Override
-	public ItemStack removeItemNoUpdate(int index) {
-		return ItemStackHelper.takeItem(items, index);
-	}
-
-	@Override
-	public void setItem(int index, ItemStack itemStack) {
-		this.items.set(index, itemStack);
-		if (itemStack.getCount() > this.getMaxStackSize()) {
-			itemStack.setCount(this.getMaxStackSize());
-		}
-	}
-
-	@Override
-	public boolean stillValid(PlayerEntity playerIn) {
-		if (this.level.getBlockEntity(this.worldPosition) != this) {
-			return false;
-		} else {
-			return playerIn.distanceToSqr((double) this.worldPosition.getX() + 0.5D,
-					(double) this.worldPosition.getY() + 0.5D, (double) this.worldPosition.getZ() + 0.5D) <= 64.0D;
-		}
-	}
-
-	@Override
-	public void clearContent() {
-		this.items.clear();
-	}
-
-	@Override
 	public void tick() {
+		super.tick();
 		boolean flag1 = false;
 		if (!this.level.isClientSide) {
 			ItemStack itemstack = this.items.get(0);
 			if (!itemstack.isEmpty() && !this.items.get(0).isEmpty()) {
-					++this.arcProgress;
+					++this.progressTime;
 					this.isLit = true;
-					if (this.arcProgress == this.totalArcTime) {
-						this.arcProgress = 0;
-						this.totalArcTime = this.getTotalArcTime();
+					if (this.progressTime == this.totalProgressTime) {
+						this.progressTime = 0;
+						this.totalProgressTime = this.gettotalProgressTime();
 						flag1 = true;
 					}
-			} else if (this.arcProgress > 0) {
-				this.arcProgress = MathHelper.clamp(this.arcProgress - 2, 0, this.totalArcTime);
+			} else if (this.progressTime > 0) {
+				this.progressTime = MathHelper.clamp(this.progressTime - 2, 0, this.totalProgressTime);
 			} else {
 				this.isLit = false;
 			}
@@ -166,12 +62,17 @@ public class ArcFurnaceTileEntity extends LockableTileEntity implements IEnergyS
 		}
 	}
 	
-	protected int getTotalArcTime() {
+	@Override
+	public void updateExData() {
+		this.dataAccess.set(8, this.isLit ? 1 : 0);
+	}
+	
+	protected int gettotalProgressTime() {
 		return 200;
 	}
 
 	public boolean isArcing() {
-		return arcProgress > 0;
+		return progressTime > 0;
 	}
 
 	@Override
@@ -210,8 +111,8 @@ public class ArcFurnaceTileEntity extends LockableTileEntity implements IEnergyS
 		compound.putBoolean("lit", this.isLit);
 		compound.putInt("energy", this.energy);
 		compound.putInt("maxEnergy", this.maxEnergy);
-		compound.putInt("arcingProgress", this.arcProgress);
-		compound.putInt("totalArcTime", this.totalArcTime);
+		compound.putInt("arcingProgress", this.progressTime);
+		compound.putInt("totalProgressTime", this.totalProgressTime);
 		return compound;
 	}
 
@@ -223,46 +124,8 @@ public class ArcFurnaceTileEntity extends LockableTileEntity implements IEnergyS
 		this.isLit = compound.getBoolean("lit");
 		this.energy = compound.getInt("energy");
 		this.maxEnergy = compound.getInt("maxEnergy");
-		this.arcProgress = compound.getInt("arcingProgress");
-		this.totalArcTime = compound.getInt("totalArcTime");
-	}
-
-	@Override
-	public int receiveEnergy(int maxReceive, boolean simulate) {
-		int energyRecieved = ((this.energy + maxReceive) > this.maxEnergy) ? this.maxEnergy : maxReceive;
-		if(!simulate) {
-			this.energy += energyRecieved;
-		}
-		return energyRecieved;
-	}
-
-	@Override
-	public int extractEnergy(int maxExtract, boolean simulate) {
-		int energyExtracted = (this.energy < maxExtract) ? this.energy : maxExtract;
-		if(!simulate) {
-			this.energy -= energyExtracted;
-		}
-		return energyExtracted;
-	}
-
-	@Override
-	public int getEnergyStored() {
-		return this.energy;
-	}
-
-	@Override
-	public int getMaxEnergyStored() {
-		return this.maxEnergy;
-	}
-
-	@Override
-	public boolean canExtract() {
-		return this.energy > 0;
-	}
-
-	@Override
-	public boolean canReceive() {
-		return this.energy < this.maxEnergy;
+		this.progressTime = compound.getInt("arcingProgress");
+		this.totalProgressTime = compound.getInt("totalProgressTime");
 	}
 
 }

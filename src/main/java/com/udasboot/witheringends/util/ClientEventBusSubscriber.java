@@ -1,13 +1,15 @@
 package com.udasboot.witheringends.util;
 
 import com.udasboot.witheringends.WitheringEnds;
+import com.udasboot.witheringends.client.gui.screen.ArcFurnaceScreen;
+import com.udasboot.witheringends.client.gui.screen.CrusherScreen;
+import com.udasboot.witheringends.client.gui.screen.GeneratorScreen;
+import com.udasboot.witheringends.client.gui.screen.InjectorScreen;
 import com.udasboot.witheringends.client.renderer.AncientRenderer;
-import com.udasboot.witheringends.client.screen.ArcFurnaceScreen;
-import com.udasboot.witheringends.client.screen.CrusherScreen;
-import com.udasboot.witheringends.client.screen.InjectorScreen;
 import com.udasboot.witheringends.init.BlockInit;
 import com.udasboot.witheringends.init.ContainerTypeInit;
 import com.udasboot.witheringends.init.EntityTypeInit;
+import com.udasboot.witheringends.init.KeyBindInit;
 
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
@@ -24,10 +26,13 @@ public class ClientEventBusSubscriber {
 	
 	@SubscribeEvent
 	public static void clientSetup(final FMLClientSetupEvent event) {
+		KeyBindInit.register(event);
 		RenderTypeLookup.setRenderLayer(BlockInit.INJECTOR.get(), RenderType.translucent());
 		ScreenManager.register(ContainerTypeInit.INJECTOR_CONTAINER_TYPE.get(), InjectorScreen::new);
 		ScreenManager.register(ContainerTypeInit.CRUSHER_CONTAINER_TYPE.get(), CrusherScreen::new);
 		ScreenManager.register(ContainerTypeInit.ARC_FURNACE_CONTAINER_TYPE.get(), ArcFurnaceScreen::new);
+		ScreenManager.register(ContainerTypeInit.GENERATOR_CONTAINER_TYPE.get(), GeneratorScreen::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.ANCIENT_ENTITY.get(), AncientRenderer::new);
 	}
+	
 }

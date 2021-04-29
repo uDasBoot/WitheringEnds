@@ -38,9 +38,9 @@ public class AncientEntity extends CreatureEntity {
 	protected void registerGoals() {
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new SwimGoal(this));
-		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
-		this.goalSelector.addGoal(2, new TemptGoal(this, 1.5D, TEMPTATION_ITEM, true));
-		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, PlayerEntity.class, 6.0F, 2.0D, 2.25D));
+		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
+		this.goalSelector.addGoal(2, new TemptGoal(this, 1.15D, TEMPTATION_ITEM, true));
+		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, PlayerEntity.class, 6.0F, 2.0D, 1.25D));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(5, new LookAtGoal(this, EndermanEntity.class, 6.0F));
 		this.goalSelector.addGoal(6, new LookRandomlyGoal(this));

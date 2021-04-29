@@ -21,7 +21,7 @@ public class DataGenerators {
 		DataGenerator gen = event.getGenerator();
 		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 		
-		gen.addProvider(new WERecipesProvider(gen));
+//		gen.addProvider(new WERecipesProvider(gen));
 		gen.addProvider(new WEItemModelProvider(gen, existingFileHelper));
 		gen.addProvider(new WEBlockStateProvider(gen, existingFileHelper));
 		gen.addProvider(new WELootTables(gen));

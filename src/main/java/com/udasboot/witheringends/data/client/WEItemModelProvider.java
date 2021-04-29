@@ -25,6 +25,7 @@ public class WEItemModelProvider extends ItemModelProvider {
 		builder(itemGenerated, "encased_nether_star");
 		builder(itemGenerated, "encasement");
 		builder(itemGenerated, "tungsten_carbide_rod");
+		builder(itemGenerated, "guide_book");
 		
 		completeMetalSet("titanium");
 		completeArmorSet("boss_empowered");

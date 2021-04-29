@@ -2,6 +2,7 @@ package com.udasboot.witheringends.tileentity;
 
 import javax.annotation.Nullable;
 
+import com.udasboot.bootcore.tileentity.AbstractMachineTileEntity;
 import com.udasboot.witheringends.WitheringEnds;
 import com.udasboot.witheringends.container.CrusherContainer;
 import com.udasboot.witheringends.init.RecipeInit;
@@ -10,7 +11,6 @@ import com.udasboot.witheringends.item.crafting.recipe.CrusherRecipe;
 
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IRecipeHolder;
 import net.minecraft.inventory.ISidedInventory;
@@ -20,132 +20,31 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.IIntArray;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class CrusherTileEntity extends LockableTileEntity
-		implements ISidedInventory, IRecipeHolder, ITickableTileEntity {
+public class CrusherTileEntity extends AbstractMachineTileEntity
+		implements ISidedInventory, IRecipeHolder {
 
-	public static int slots = 2;
 	private static final int[] SLOTS_FOR_UP = new int[] { 0 };
 	private static final int[] SLOTS_FOR_DOWN = new int[] { 1 };
 	private static final int[] SLOTS_FOR_SIDES = new int[] { 0 };
 
-	protected NonNullList<ItemStack> items = NonNullList.withSize(slots, ItemStack.EMPTY);
 	protected final IRecipeType<CrusherRecipe> recipeType;
 	private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
-	protected int energy;
-	protected int maxEnergy;
-	protected int crushingProgress;
-	protected int totalCrushingTime;
-
-	public final IIntArray dataAccess = new IIntArray() {
-		public int get(int index) {
-			switch (index) {
-			case 0:
-				return CrusherTileEntity.this.energy;
-			case 1:
-				return CrusherTileEntity.this.maxEnergy;
-			case 2:
-				return CrusherTileEntity.this.crushingProgress;
-			case 3:
-				return CrusherTileEntity.this.totalCrushingTime;
-			default:
-				return 0;
-			}
-		}
-
-		public void set(int index, int value) {
-			switch (index) {
-			case 0:
-				CrusherTileEntity.this.energy = value;
-				break;
-			case 1:
-				CrusherTileEntity.this.maxEnergy = value;
-			case 2:
-				CrusherTileEntity.this.crushingProgress = value;
-			case 3:
-				CrusherTileEntity.this.totalCrushingTime = value;
-			}
-		}
-
-		public int getCount() {
-			return 4;
-		}
-	};
-
+	
 	public CrusherTileEntity(TileEntityType<?> tileEntityType) {
-		super(tileEntityType);
+		super(tileEntityType, 2);
 		this.recipeType = RecipeInit.Types.CRUSHING;
-		this.maxEnergy = 10000;
-		this.energy = 0;
-		this.crushingProgress = 0;
-		this.totalCrushingTime = 40;
 	}
 
 	public CrusherTileEntity() {
 		this(TileEntityTypeInit.CRUSHER_TILE_ENTITY.get());
-	}
-
-	@Override
-	public int getContainerSize() {
-		return slots;
-	}
-
-	@Override
-	public boolean isEmpty() {
-		for (ItemStack itemStack : items) {
-			if (!itemStack.isEmpty()) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	@Override
-	public ItemStack getItem(int index) {
-		return items.get(index);
-	}
-
-	@Override
-	public ItemStack removeItem(int index, int amount) {
-		return ItemStackHelper.removeItem(items, index, amount);
-	}
-
-	@Override
-	public ItemStack removeItemNoUpdate(int index) {
-		return ItemStackHelper.takeItem(items, index);
-	}
-
-	@Override
-	public void setItem(int index, ItemStack itemStack) {
-		this.items.set(index, itemStack);
-		if (itemStack.getCount() > this.getMaxStackSize()) {
-			itemStack.setCount(this.getMaxStackSize());
-		}
-	}
-
-	@Override
-	public boolean stillValid(PlayerEntity playerIn) {
-		if (this.level.getBlockEntity(this.worldPosition) != this) {
-			return false;
-		} else {
-			return playerIn.distanceToSqr((double) this.worldPosition.getX() + 0.5D,
-					(double) this.worldPosition.getY() + 0.5D, (double) this.worldPosition.getZ() + 0.5D) <= 64.0D;
-		}
-	}
-
-	@Override
-	public void clearContent() {
-		this.items.clear();
 	}
 
 	@Override
@@ -154,14 +53,14 @@ public class CrusherTileEntity extends LockableTileEntity
 		if (!this.level.isClientSide) {
 			ItemStack itemstack = this.items.get(0);
 			if (!itemstack.isEmpty() && !this.items.get(0).isEmpty()) {
-					++this.crushingProgress;
-					if (this.crushingProgress == this.totalCrushingTime) {
-						this.crushingProgress = 0;
-						this.totalCrushingTime = this.getTotalCrushTime();
+					++this.progressTime;
+					if (this.progressTime == this.totalProgressTime) {
+						this.progressTime = 0;
+						this.totalProgressTime = this.getTotalCrushTime();
 						flag1 = true;
 					}
-			} else if (this.crushingProgress > 0) {
-				this.crushingProgress = MathHelper.clamp(this.crushingProgress - 2, 0, this.totalCrushingTime);
+			} else if (this.progressTime > 0) {
+				this.progressTime = MathHelper.clamp(this.progressTime - 2, 0, this.totalProgressTime);
 			}
 		}
 		if (flag1) {
@@ -219,7 +118,7 @@ public class CrusherTileEntity extends LockableTileEntity
 	}
 
 	public boolean isCrushing() {
-		return crushingProgress > 0;
+		return progressTime > 0;
 	}
 
 	@Override
@@ -257,8 +156,8 @@ public class CrusherTileEntity extends LockableTileEntity
 		ItemStackHelper.saveAllItems(compound, items);
 		compound.putInt("energy", this.energy);
 		compound.putInt("maxEnergy", this.maxEnergy);
-		compound.putInt("crushingProgress", this.crushingProgress);
-		compound.putInt("totalCrushingTime", this.totalCrushingTime);
+		compound.putInt("progressTime", this.progressTime);
+		compound.putInt("totalProgressTime", this.totalProgressTime);
 		CompoundNBT compoundnbt = new CompoundNBT();
 		this.recipesUsed.forEach((p_235643_1_, p_235643_2_) -> {
 			compoundnbt.putInt(p_235643_1_.toString(), p_235643_2_);
@@ -274,8 +173,8 @@ public class CrusherTileEntity extends LockableTileEntity
 		ItemStackHelper.loadAllItems(compound, items);
 		this.energy = compound.getInt("energy");
 		this.maxEnergy = compound.getInt("maxEnergy");
-		this.crushingProgress = compound.getInt("crushingProgress");
-		this.totalCrushingTime = compound.getInt("totalCrushingTime");
+		this.progressTime = compound.getInt("progressTime");
+		this.totalProgressTime = compound.getInt("totalProgressTime");
 
 		CompoundNBT compoundnbt = compound.getCompound("RecipesUsed");
 
