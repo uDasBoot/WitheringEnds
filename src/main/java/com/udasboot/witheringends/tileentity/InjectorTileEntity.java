@@ -64,7 +64,7 @@ public class InjectorTileEntity extends AbstractMachineTileEntity implements ISi
 		checkBreathUpdate();
 		checkCraftRecipe();
 	}
-	
+
 	@Override
 	public void updateExData() {
 		this.dataAccess.set(4, breath);
@@ -79,25 +79,28 @@ public class InjectorTileEntity extends AbstractMachineTileEntity implements ISi
 		ItemStack netherStar = items.get(1);
 		ItemStack result = items.get(2);
 		if ((encasement.getItem() == ItemInit.ENCASEMENT.get() && netherStar.getItem() == Items.NETHER_STAR
-				&& this.breath >= 100 && this.energy > 0 && !((result.getCount() + 1) > result.getMaxStackSize())) || isInjecting()) {
+				&& this.breath >= 100 && !((result.getCount() + 1) > result.getMaxStackSize())) || isInjecting()) {
 			if (!this.level.isClientSide) {
-				if (progressTime == 0 && (!encasement.isEmpty() && !netherStar.isEmpty())) {
+				if (this.energy > 0 && progressTime == 0 && (!encasement.isEmpty() && !netherStar.isEmpty())) {
 					this.breath -= 100;
 					encasement.shrink(1);
 					netherStar.shrink(1);
 				}
 
-				progressTime++;
-				energy -= 20;
+				if (this.energy > 0) {
 
-				if (progressTime >= totalProgressTime) {
-					this.progressTime = 0;
-					if (result.isEmpty()) {
-						this.setItem(2, new ItemStack(ItemInit.ENCASED_NETHER_STAR.get()));
-					} else {
-						result.grow(1);
+					progressTime++;
+					energy -= 20;
+
+					if (progressTime >= totalProgressTime) {
+						this.progressTime = 0;
+						if (result.isEmpty()) {
+							this.setItem(2, new ItemStack(ItemInit.ENCASED_NETHER_STAR.get()));
+						} else {
+							result.grow(1);
+						}
+						this.setChanged();
 					}
-					this.setChanged();
 				}
 			}
 		}
@@ -147,7 +150,7 @@ public class InjectorTileEntity extends AbstractMachineTileEntity implements ISi
 
 	@Override
 	public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, Direction direction) {
-		for(int i : getSlotsForFace(direction)) {
+		for (int i : getSlotsForFace(direction)) {
 			if (index == i) {
 				return true;
 			}
@@ -157,7 +160,7 @@ public class InjectorTileEntity extends AbstractMachineTileEntity implements ISi
 
 	@Override
 	public boolean canTakeItemThroughFace(int index, ItemStack itemStack, Direction direction) {
-		for(int i : getSlotsForFace(direction)) {
+		for (int i : getSlotsForFace(direction)) {
 			if (index == i) {
 				return true;
 			}
