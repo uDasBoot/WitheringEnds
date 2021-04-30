@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "witheringends:block/machine_casing",
+    "front": "witheringends:block/arc_furnace_machine_active",
+    "side": "witheringends:block/machine_casing",
+    "bottom": "witheringends:block/machine_casing_bottom"
+  }
+}

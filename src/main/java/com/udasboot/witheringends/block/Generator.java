@@ -1,6 +1,6 @@
 package com.udasboot.witheringends.block;
 
-import com.udasboot.bootcore.block.AbstractGeneratorBlock;
+import com.udasboot.dascore.block.AbstractGeneratorBlock;
 import com.udasboot.witheringends.init.TileEntityTypeInit;
 import com.udasboot.witheringends.tileentity.GeneratorTileEntity;
 

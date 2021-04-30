@@ -1,9 +1,9 @@
 package com.udasboot.witheringends.container;
 
-import com.udasboot.bootcore.container.AbstractMachineContainer;
-import com.udasboot.bootcore.container.FuelSlot;
-import com.udasboot.bootcore.container.IngredientSlot;
-import com.udasboot.bootcore.container.ResultSlot;
+import com.udasboot.dascore.container.AbstractMachineContainer;
+import com.udasboot.dascore.container.FuelSlot;
+import com.udasboot.dascore.container.IngredientSlot;
+import com.udasboot.dascore.container.ResultSlot;
 import com.udasboot.witheringends.init.BlockInit;
 import com.udasboot.witheringends.init.ContainerTypeInit;
 import com.udasboot.witheringends.init.ItemInit;
@@ -33,5 +33,9 @@ public class ArcFurnaceContainer extends AbstractMachineContainer {
 		this.addSlot(new IngredientSlot(te, 1, 65, 17));
 		this.addSlot(new FuelSlot(fuels, te, 2, 56, 53));
 		this.addSlot(new ResultSlot(te, 3, 116, 35));
+	}
+	
+	public boolean isArcing() {
+		return this.getProgress() > 0;
 	}
 }

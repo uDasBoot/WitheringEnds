@@ -1,9 +1,8 @@
 package com.udasboot.witheringends.tileentity;
 
-import javax.annotation.Nullable;
-
-import com.udasboot.bootcore.tileentity.AbstractMachineTileEntity;
+import com.udasboot.dascore.tileentity.AbstractMachineTileEntity;
 import com.udasboot.witheringends.WitheringEnds;
+import com.udasboot.witheringends.block.Generator;
 import com.udasboot.witheringends.container.CrusherContainer;
 import com.udasboot.witheringends.init.RecipeInit;
 import com.udasboot.witheringends.init.TileEntityTypeInit;
@@ -24,7 +23,6 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
@@ -49,76 +47,30 @@ public class CrusherTileEntity extends AbstractMachineTileEntity
 
 	@Override
 	public void tick() {
+		super.tick();
 		boolean flag1 = false;
 		if (!this.level.isClientSide) {
 			ItemStack itemstack = this.items.get(0);
 			if (!itemstack.isEmpty() && !this.items.get(0).isEmpty()) {
+				if(this.hasEnoughEnergy) {
 					++this.progressTime;
 					if (this.progressTime == this.totalProgressTime) {
 						this.progressTime = 0;
 						this.totalProgressTime = this.getTotalCrushTime();
 						flag1 = true;
 					}
-			} else if (this.progressTime > 0) {
-				this.progressTime = MathHelper.clamp(this.progressTime - 2, 0, this.totalProgressTime);
+				}
 			}
+			this.level.setBlock(this.worldPosition,
+					this.level.getBlockState(this.worldPosition).setValue(Generator.LIT, this.isInUse()), 3);
 		}
 		if (flag1) {
 			this.setChanged();
 		}
 	}
 
-	public boolean canItemBeCrushed(@Nullable IRecipe<?> irecipe) {
-		if (!this.items.get(0).isEmpty() && irecipe != null) {
-			ItemStack itemstack = irecipe.getResultItem();
-			System.out.println("Can Item Be Crushed " + itemstack.getDisplayName());
-			if (itemstack.isEmpty()) {
-				return false;
-			} else {
-				ItemStack itemstack1 = this.items.get(2);
-				if (itemstack1.isEmpty()) {
-					return true;
-				} else if (!itemstack1.sameItem(itemstack)) {
-					return false;
-				} else if (itemstack1.getCount() + itemstack.getCount() <= this.getMaxStackSize()
-						&& itemstack1.getCount() + itemstack.getCount() <= itemstack1.getMaxStackSize()) {
-
-					return true;
-				} else {
-					return itemstack1.getCount() + itemstack.getCount() <= itemstack.getMaxStackSize();
-
-				}
-			}
-		} else {
-			return false;
-		}
-	}
-
-	private void crush(@Nullable IRecipe<?> irecipe) {
-		if (irecipe != null && this.canItemBeCrushed(irecipe)) {
-			ItemStack itemstack = this.items.get(0);
-			ItemStack itemstack1 = irecipe.getResultItem();
-			ItemStack itemstack2 = this.items.get(2);
-			if (itemstack2.isEmpty()) {
-				this.items.set(2, itemstack1.copy());
-			} else if (itemstack2.getItem() == itemstack1.getItem()) {
-				itemstack2.grow(itemstack1.getCount());
-			}
-
-			if (!this.level.isClientSide) {
-				this.setRecipeUsed(irecipe);
-			}
-
-			itemstack.shrink(1);
-		}
-	}
-
 	protected int getTotalCrushTime() {
 		return 200;
-	}
-
-	public boolean isCrushing() {
-		return progressTime > 0;
 	}
 
 	@Override

@@ -1,13 +1,15 @@
 package com.udasboot.witheringends.init;
 
+import com.udasboot.witheringends.WitheringEnds;
+
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
-public class ItemGroupInit extends ItemGroup {
+public class ModItemGroup extends ItemGroup {
 	
-	public static final ItemGroupInit WITHERING_ENDS = new ItemGroupInit(ItemGroup.getGroupCountSafe(), "withering_ends");
+	public static ModItemGroup INSTANCE = new ModItemGroup(ItemGroup.getGroupCountSafe(), WitheringEnds.MOD_ID);
 
-	public ItemGroupInit(int index, String label) {
+	public ModItemGroup(int index, String label) {
 		super(index, label);
 	}
 

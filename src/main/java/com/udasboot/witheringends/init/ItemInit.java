@@ -2,8 +2,9 @@ package com.udasboot.witheringends.init;
 
 import java.util.function.Supplier;
 
+import com.udasboot.dascore.item.GenericModItem;
+import com.udasboot.dascore.util.ToolTipsHandler;
 import com.udasboot.witheringends.item.EncasedNetherStar;
-import com.udasboot.witheringends.item.GenericWEItem;
 import com.udasboot.witheringends.item.GuideBook;
 import com.udasboot.witheringends.item.ItemBossEmpoweredBoots;
 import com.udasboot.witheringends.item.ItemBossEmpoweredChestplate;
@@ -19,16 +20,20 @@ import com.udasboot.witheringends.item.ItemTitaniumLeggings;
 import com.udasboot.witheringends.item.ItemTitaniumPickaxe;
 import com.udasboot.witheringends.item.ItemTitaniumShovel;
 import com.udasboot.witheringends.item.ItemTitaniumSword;
-import com.udasboot.witheringends.item.WEToolTips;
+import com.udasboot.witheringends.util.ToolTipTypes;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 
 public class ItemInit {
 	
+	private static final Item.Properties DEFAULT_PROPS = new Item.Properties().tab(ModItemGroup.INSTANCE);
+
 	public static final RegistryObject<Item> GUIDE_BOOK = register("guide_book", GuideBook::new);
-	public static final RegistryObject<Item> ENCASED_NETHER_STAR = register("encased_nether_star", EncasedNetherStar::new);
-	public static final RegistryObject<Item> ENCASEMENT = register("encasement", () -> new GenericWEItem(WEToolTips.ENCASEMENT));
+	public static final RegistryObject<Item> ENCASED_NETHER_STAR = register("encased_nether_star",
+			EncasedNetherStar::new);
+	public static final RegistryObject<Item> ENCASEMENT = register("encasement",
+			() -> new GenericModItem(DEFAULT_PROPS, ToolTipsHandler.generateToolTip("Encasement for holding nether stars")));
 
 	// BOSS EMPOWERED SET
 	public static final RegistryObject<Item> BOSS_EMPOWERED_HELM = register("boss_empowered_helmet",
@@ -41,9 +46,12 @@ public class ItemInit {
 			ItemBossEmpoweredBoots::new);
 
 	// TITANIUM SET
-	public static final RegistryObject<Item> TITANIUM_INGOT = register("titanium_ingot", () -> new GenericWEItem(WEToolTips.TITANIUM));
-	public static final RegistryObject<Item> TITANIUM_NUGGET = register("titanium_nugget", () -> new GenericWEItem(WEToolTips.TITANIUM));
-	public static final RegistryObject<Item> TITANIUM_DUST = register("titanium_dust", () -> new GenericWEItem(WEToolTips.TITANIUM));
+	public static final RegistryObject<Item> TITANIUM_INGOT = register("titanium_ingot",
+			() -> new GenericModItem(DEFAULT_PROPS, ToolTipsHandler.generateToolTip("Encasement for holding nether stars")));
+	public static final RegistryObject<Item> TITANIUM_NUGGET = register("titanium_nugget",
+			() -> new GenericModItem(DEFAULT_PROPS, ToolTipTypes.TITANIUM));
+	public static final RegistryObject<Item> TITANIUM_DUST = register("titanium_dust",
+			() -> new GenericModItem(DEFAULT_PROPS, ToolTipTypes.TITANIUM));
 	public static final RegistryObject<Item> TITANIUM_HELM = register("titanium_helmet", ItemTitaniumHelmet::new);
 	public static final RegistryObject<Item> TITANIUM_CHEST = register("titanium_chestplate",
 			ItemTitaniumChestplate::new);
@@ -54,17 +62,26 @@ public class ItemInit {
 	public static final RegistryObject<Item> TITANIUM_HOE = register("titanium_hoe", ItemTitaniumHoe::new);
 	public static final RegistryObject<Item> TITANIUM_SHOVEL = register("titanium_shovel", ItemTitaniumShovel::new);
 	public static final RegistryObject<Item> TITANIUM_SWORD = register("titanium_sword", ItemTitaniumSword::new);
-	public static final RegistryObject<Item> TITANIUM_DOOR = register("titanium_door", () -> new GenericWEItem(WEToolTips.NONE));
-	public static final RegistryObject<Item> TITANIUM_HORSE_ARMOR = register("titanium_horse_armor", ItemTitaniumHorseArmor::new);
-	
-	public static final RegistryObject<Item> TUNGSTEN_CARBIDE_ROD = register("tungsten_carbide_rod", () -> new GenericWEItem(WEToolTips.TUNGSTEN));
-	public static final RegistryObject<Item> TUNGSTEN_INGOT = register("tungsten_ingot", () -> new GenericWEItem(WEToolTips.TUNGSTEN));
-	public static final RegistryObject<Item> TUNGSTEN_NUGGET = register("tungsten_nugget", () -> new GenericWEItem(WEToolTips.TUNGSTEN));
-	public static final RegistryObject<Item> TUNGSTEN_DUST = register("tungsten_dust", () -> new GenericWEItem(WEToolTips.TUNGSTEN));
-	
-	public static final RegistryObject<Item> ALUMINUM_INGOT = register("aluminum_ingot", () -> new GenericWEItem(WEToolTips.ALUMINUM));
-	public static final RegistryObject<Item> ALUMINUM_NUGGET = register("aluminum_nugget", () -> new GenericWEItem(WEToolTips.ALUMINUM));
-	public static final RegistryObject<Item> ALUMINUM_DUST = register("aluminum_dust", () -> new GenericWEItem(WEToolTips.ALUMINUM));
+	public static final RegistryObject<Item> TITANIUM_DOOR = register("titanium_door",
+			() -> new GenericModItem(DEFAULT_PROPS, ToolTipsHandler.NONE));
+	public static final RegistryObject<Item> TITANIUM_HORSE_ARMOR = register("titanium_horse_armor",
+			ItemTitaniumHorseArmor::new);
+
+	public static final RegistryObject<Item> TUNGSTEN_CARBIDE_ROD = register("tungsten_carbide_rod",
+			() -> new GenericModItem(DEFAULT_PROPS, ToolTipTypes.TUNGSTEN));
+	public static final RegistryObject<Item> TUNGSTEN_INGOT = register("tungsten_ingot",
+			() -> new GenericModItem(DEFAULT_PROPS, ToolTipTypes.TUNGSTEN));
+	public static final RegistryObject<Item> TUNGSTEN_NUGGET = register("tungsten_nugget",
+			() -> new GenericModItem(DEFAULT_PROPS, ToolTipTypes.TUNGSTEN));
+	public static final RegistryObject<Item> TUNGSTEN_DUST = register("tungsten_dust",
+			() -> new GenericModItem(DEFAULT_PROPS, ToolTipTypes.TUNGSTEN));
+
+	public static final RegistryObject<Item> ALUMINUM_INGOT = register("aluminum_ingot",
+			() -> new GenericModItem(DEFAULT_PROPS, ToolTipTypes.ALUMINUM));
+	public static final RegistryObject<Item> ALUMINUM_NUGGET = register("aluminum_nugget",
+			() -> new GenericModItem(DEFAULT_PROPS, ToolTipTypes.ALUMINUM));
+	public static final RegistryObject<Item> ALUMINUM_DUST = register("aluminum_dust",
+			() -> new GenericModItem(DEFAULT_PROPS, ToolTipTypes.ALUMINUM));
 
 	private static <T extends Item> RegistryObject<T> register(String name, Supplier<T> item) {
 		return Registration.ITEMS.register(name, item);

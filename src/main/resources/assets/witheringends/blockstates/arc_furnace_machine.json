@@ -1,19 +1,37 @@
 {
-  "variants": {
-    "facing=east": {
-      "model": "minecraft:block/furnace",
-      "y": 90
-    },
-    "facing=north": {
-      "model": "minecraft:block/furnace"
-    },
-    "facing=south": {
-      "model": "minecraft:block/furnace",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "minecraft:block/furnace",
-      "y": 270
-    }
-  }
+	"variants": {
+		"facing=north,lit=false": { 
+			"model": "witheringends:block/arc_furnace_machine" 
+		},
+		"facing=north,lit=true": {
+			"model": "witheringends:block/arc_furnace_machine_active"
+		},
+		
+		"facing=east,lit=false": {
+			"model": "witheringends:block/arc_furnace_machine",
+			"y": 90
+		},
+		"facing=east,lit=true": {
+			"model": "witheringends:block/arc_furnace_machine_active",
+			"y": 90
+		},
+		
+		"facing=south,lit=false": {
+			"model": "witheringends:block/arc_furnace_machine",
+			"y": 180
+		},
+		"facing=south,lit=true": {
+			"model": "witheringends:block/arc_furnace_machine_active",
+			"y": 180
+		},
+		
+		"facing=west,lit=false": {
+			"model": "witheringends:block/arc_furnace_machine",
+			"y": 270
+		},
+		"facing=west,lit=true": {
+			"model": "witheringends:block/arc_furnace_machine_active",
+			"y": 270
+		}
+	}
 }

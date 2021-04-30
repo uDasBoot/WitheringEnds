@@ -1,8 +1,8 @@
 package com.udasboot.witheringends.container;
 
-import com.udasboot.bootcore.container.AbstractMachineContainer;
-import com.udasboot.bootcore.container.IngredientSlot;
-import com.udasboot.bootcore.container.ResultSlot;
+import com.udasboot.dascore.container.AbstractMachineContainer;
+import com.udasboot.dascore.container.IngredientSlot;
+import com.udasboot.dascore.container.ResultSlot;
 import com.udasboot.witheringends.init.BlockInit;
 import com.udasboot.witheringends.init.ContainerTypeInit;
 import com.udasboot.witheringends.tileentity.CrusherTileEntity;

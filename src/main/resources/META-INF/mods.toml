@@ -28,6 +28,6 @@ TBD
 [[dependencies.witheringends]]
     modId="dascore"
     mandatory=true
-    versionRange=""
+    versionRange="[0.0.1,)"
     ordering="NONE"
     side="BOTH"

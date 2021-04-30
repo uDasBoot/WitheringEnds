@@ -1,6 +1,6 @@
 package com.udasboot.witheringends.tileentity;
 
-import com.udasboot.bootcore.tileentity.AbstractMachineTileEntity;
+import com.udasboot.dascore.tileentity.AbstractMachineTileEntity;
 import com.udasboot.witheringends.WitheringEnds;
 import com.udasboot.witheringends.block.Injector;
 import com.udasboot.witheringends.container.InjectorContainer;
@@ -79,18 +79,17 @@ public class InjectorTileEntity extends AbstractMachineTileEntity implements ISi
 		ItemStack netherStar = items.get(1);
 		ItemStack result = items.get(2);
 		if ((encasement.getItem() == ItemInit.ENCASEMENT.get() && netherStar.getItem() == Items.NETHER_STAR
-				&& this.breath >= 100 && !((result.getCount() + 1) > result.getMaxStackSize())) || isInjecting()) {
+				&& this.breath >= 100 && !((result.getCount() + 1) > result.getMaxStackSize())) || isInUse()) {
 			if (!this.level.isClientSide) {
-				if (this.energy > 0 && progressTime == 0 && (!encasement.isEmpty() && !netherStar.isEmpty())) {
+				if (this.hasEnoughEnergy && progressTime == 0 && (!encasement.isEmpty() && !netherStar.isEmpty())) {
 					this.breath -= 100;
 					encasement.shrink(1);
 					netherStar.shrink(1);
 				}
 
-				if (this.energy > 0) {
+				if (this.hasEnoughEnergy) {
 
 					progressTime++;
-					energy -= 20;
 
 					if (progressTime >= totalProgressTime) {
 						this.progressTime = 0;
@@ -133,10 +132,6 @@ public class InjectorTileEntity extends AbstractMachineTileEntity implements ISi
 
 	public boolean isBreathFull() {
 		return (breath + 1000) > maxBreath;
-	}
-
-	public boolean isInjecting() {
-		return progressTime > 0;
 	}
 
 	@Override

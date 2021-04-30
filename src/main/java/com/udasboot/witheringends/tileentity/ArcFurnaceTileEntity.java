@@ -1,7 +1,9 @@
+
 package com.udasboot.witheringends.tileentity;
 
-import com.udasboot.bootcore.tileentity.AbstractMachineTileEntity;
+import com.udasboot.dascore.tileentity.AbstractMachineTileEntity;
 import com.udasboot.witheringends.WitheringEnds;
+import com.udasboot.witheringends.block.Generator;
 import com.udasboot.witheringends.container.ArcFurnaceContainer;
 import com.udasboot.witheringends.init.TileEntityTypeInit;
 
@@ -25,12 +27,8 @@ public class ArcFurnaceTileEntity extends AbstractMachineTileEntity implements I
 	private static final int[] SLOTS_FOR_DOWN = new int[] { 3 };
 	private static final int[] SLOTS_FOR_SIDES = new int[] { 1, 2 };
 
-	protected boolean isLit;
-
 	public ArcFurnaceTileEntity(TileEntityType<?> tileEntityType) {
 		super(tileEntityType, 4);
-		this.isLit = false;
-		this.dataAccess.set(8, this.isLit ? 1 : 0);
 	}
 
 	public ArcFurnaceTileEntity() {
@@ -44,36 +42,27 @@ public class ArcFurnaceTileEntity extends AbstractMachineTileEntity implements I
 		if (!this.level.isClientSide) {
 			ItemStack itemstack = this.items.get(0);
 			if (!itemstack.isEmpty() && !this.items.get(0).isEmpty()) {
+				if (this.hasEnoughEnergy) {
 					++this.progressTime;
-					this.isLit = true;
 					if (this.progressTime == this.totalProgressTime) {
 						this.progressTime = 0;
 						this.totalProgressTime = this.gettotalProgressTime();
 						flag1 = true;
 					}
-			} else if (this.progressTime > 0) {
-				this.progressTime = MathHelper.clamp(this.progressTime - 2, 0, this.totalProgressTime);
-			} else {
-				this.isLit = false;
+				}
 			}
+			this.level.setBlock(this.worldPosition,
+					this.level.getBlockState(this.worldPosition).setValue(Generator.LIT, this.isInUse()), 3);
 		}
 		if (flag1) {
 			this.setChanged();
 		}
 	}
-	
-	@Override
-	public void updateExData() {
-		this.dataAccess.set(8, this.isLit ? 1 : 0);
-	}
-	
+
 	protected int gettotalProgressTime() {
 		return 200;
 	}
 
-	public boolean isArcing() {
-		return progressTime > 0;
-	}
 
 	@Override
 	public int[] getSlotsForFace(Direction direction) {
@@ -108,7 +97,6 @@ public class ArcFurnaceTileEntity extends AbstractMachineTileEntity implements I
 	public CompoundNBT save(CompoundNBT compound) {
 		super.save(compound);
 		ItemStackHelper.saveAllItems(compound, items);
-		compound.putBoolean("lit", this.isLit);
 		compound.putInt("energy", this.energy);
 		compound.putInt("maxEnergy", this.maxEnergy);
 		compound.putInt("arcingProgress", this.progressTime);
@@ -121,7 +109,6 @@ public class ArcFurnaceTileEntity extends AbstractMachineTileEntity implements I
 		super.load(state, compound);
 		this.items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(compound, items);
-		this.isLit = compound.getBoolean("lit");
 		this.energy = compound.getInt("energy");
 		this.maxEnergy = compound.getInt("maxEnergy");
 		this.progressTime = compound.getInt("arcingProgress");

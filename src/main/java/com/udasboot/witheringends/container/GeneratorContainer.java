@@ -1,7 +1,7 @@
 package com.udasboot.witheringends.container;
 
-import com.udasboot.bootcore.container.AbstractGeneratorContainer;
-import com.udasboot.bootcore.container.FuelSlot;
+import com.udasboot.dascore.container.AbstractGeneratorContainer;
+import com.udasboot.dascore.container.FuelSlot;
 import com.udasboot.witheringends.init.BlockInit;
 import com.udasboot.witheringends.init.ContainerTypeInit;
 import com.udasboot.witheringends.tileentity.GeneratorTileEntity;

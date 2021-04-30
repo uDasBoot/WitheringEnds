@@ -3,7 +3,7 @@ package com.udasboot.witheringends;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.udasboot.bootcore.util.Constants;
+import com.udasboot.dascore.util.Constants;
 import com.udasboot.witheringends.entities.AncientEntity;
 import com.udasboot.witheringends.init.EntityTypeInit;
 import com.udasboot.witheringends.init.FeatureInit;
@@ -31,7 +31,6 @@ public class WitheringEnds {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.addListener(this::commonSetup);
 		bus.addListener(this::entityAttributeCreation);
-		
 		Registration.register();
 		
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, FeatureInit::addOres);

@@ -1,7 +1,7 @@
 package com.udasboot.witheringends.block;
 
-import com.udasboot.bootcore.block.AbstractMachineBlock;
-import com.udasboot.bootcore.util.Constants;
+import com.udasboot.dascore.block.AbstractMachineBlock;
+import com.udasboot.dascore.util.Constants;
 import com.udasboot.witheringends.init.TileEntityTypeInit;
 import com.udasboot.witheringends.tileentity.InjectorTileEntity;
 
@@ -27,7 +27,7 @@ public class Injector extends AbstractMachineBlock {
 	private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 20, 16);
 
 	public Injector() {
-		super(Constants.DEFAULT_PROPS.noOcclusion(), InjectorTileEntity.class);
+		super(Constants.DEFAULT_BLOCK_PROPS.noOcclusion(), InjectorTileEntity.class);
 		this.registerDefaultState(this.defaultBlockState().setValue(FULL, false));
 	}
 
